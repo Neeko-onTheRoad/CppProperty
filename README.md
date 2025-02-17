@@ -61,6 +61,6 @@ public:
 };
 ```
 
-Getter and Setter is mecro.  
+Getter and Setter is macro.  
 You can replace `get(type)` to `[&]() -> type&`  
 And `set(type)` to `[&](const type&)`
