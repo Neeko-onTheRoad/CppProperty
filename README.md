@@ -62,5 +62,5 @@ public:
 ```
 
 Getter and Setter is mecro.  
-You can replace `get(type)` to `[&]() -> type&`,
+You can replace `get(type)` to `[&]() -> type&`  
 And `set(type)` to `[&](const type&)`
