@@ -1,6 +1,6 @@
 # C\# style C++ properties
 
-This is simple library that make you easy to make get/set function.
+This is a simple library that makes you easy to write get/set function.
 
 ## In C\#
 
