@@ -18,11 +18,10 @@ public class TestClass {
         }
     }
 
-    private string _stringField;
     public string StringProperty {
         get {
             _intField++;
-            _stringField = value;
+            return "This is property";
         }
     }
 }
@@ -39,7 +38,6 @@ class TestClass {
 private:
 
     int _intField;
-    std::string _stringField;
 
 public:
 
@@ -52,6 +50,13 @@ public:
             _intField = value;
         }
     };
+
+    nk::GetterOnlyProperty<std::string> {
+        get(int) {
+            _intField++;
+            return "This is property";
+        }
+    }
 
 };
 ```
