@@ -1,6 +1,6 @@
 # C\# style C++ properties
 
-This is simple libray that make you easy to make get/set function.
+This is simple library that make you easy to make get/set function.
 
 ## In C\#
 
@@ -27,7 +27,7 @@ public class TestClass {
 }
 ```
 
-## In C++ with this libray
+## In C++ with this library
 
 ```cpp
 #include <iostream>
