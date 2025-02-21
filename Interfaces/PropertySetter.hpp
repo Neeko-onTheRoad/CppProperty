@@ -3,7 +3,8 @@
 
 #include <functional>
 
-#define set(type) [&](const type& value)
+#define set(type) \
+	static_cast<std::function<void(const type&)>[&](const type& value)
 
 namespace nk {
 

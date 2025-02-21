@@ -3,7 +3,8 @@
 
 #include <functional>
 
-#define get(type) [&]() -> type&
+#define get(type) \
+	static_cast<std::function(const type&)>[&]() -> type&
 
 namespace nk {
 
