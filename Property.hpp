@@ -1,13 +1,13 @@
 #ifndef __PROPERTY_HPP__
 #define __PROPERTY_HPP__
 
-#include "PropertySetter.hpp"
 #include "GetterOnlyProperty.hpp"
+#include "SetterOnlyProperty.hpp"
 
 namespace nk {
 
 	template<typename TValue>
-	class Property : public GetterOnlyProperty<TValue>, public PropertySetter<TValue> {
+	class Property : public GetterOnlyProperty<TValue>, public SetterOnlyProperty<TValue> {
 
 	public:
 		
@@ -16,7 +16,7 @@ namespace nk {
 
 		Property(GetterFunction getter, SetterFunction setter) :
 			GetterOnlyProperty<TValue>(getter),
-			PropertySetter<TValue>(setter) {}
+			SetterOnlyProperty<TValue>(setter) {}
 
 		using PropertySetter<TValue>::operator=;
 

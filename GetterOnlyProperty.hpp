@@ -1,7 +1,7 @@
 #ifndef __GETTER_ONLY_PROPERTY_HPP__
 #define __GETTER_ONLY_PROPERTY_HPP__
 
-#include "PropertyGetter.hpp"
+#include "Interfaces/PropertyGetter.hpp"
 
 namespace nk {
 
