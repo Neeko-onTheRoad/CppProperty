@@ -14,9 +14,9 @@ namespace nk {
 		using GetterFunction = typename PropertyGetter<TValue>::GetterFunction;
 		using SetterFunction = typename PropertySetter<TValue>::SetterFunction;
 
-		Property(GetterFunction getter, SetterFunction setter) :
+		Property(GetterFunction getter, SetterFunction setter = nullptr) :
 			GetterOnlyProperty<TValue>(getter),
-			SetterOnlyProperty<TValue>(setter) {}
+			SetterOnlyProperty<TValue>(setter ? setter : [&](const TValue&){}) {}
 
 		using PropertySetter<TValue>::operator=;
 
