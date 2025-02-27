@@ -19,10 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="General\Event.hpp" />
+    <ClInclude Include="CppProperty.hpp" />
     <ClInclude Include="Property\GetterOnlyProperty.hpp" />
+    <ClInclude Include="Property\Lazy\LazyProperty.hpp" />
+    <ClInclude Include="Property\Observable\ObservableProperty.hpp" />
+    <ClInclude Include="Property\Observable\SetterOnlyObservableProperty.hpp" />
     <ClInclude Include="Property\Property.hpp" />
     <ClInclude Include="Property\SetterOnlyProperty.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

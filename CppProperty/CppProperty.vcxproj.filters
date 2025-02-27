@@ -13,17 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="헤더 파일\General">
-      <UniqueIdentifier>{4f99bcbe-c4cd-46ce-89da-8a365e49d2ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Property">
       <UniqueIdentifier>{fa05463b-6268-40ad-83d0-9a061c9addbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Property\Observable">
+      <UniqueIdentifier>{c6b0d6f6-e8e2-4b36-8107-886ff6742edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Property\Lazy">
+      <UniqueIdentifier>{d9f1246c-d041-4663-8755-46d27e60a4ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="General\Event.hpp">
-      <Filter>헤더 파일\General</Filter>
-    </ClInclude>
     <ClInclude Include="Property\GetterOnlyProperty.hpp">
       <Filter>헤더 파일\Property</Filter>
     </ClInclude>
@@ -33,5 +33,22 @@
     <ClInclude Include="Property\SetterOnlyProperty.hpp">
       <Filter>헤더 파일\Property</Filter>
     </ClInclude>
+    <ClInclude Include="CppProperty.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\Observable\ObservableProperty.hpp">
+      <Filter>헤더 파일\Property\Observable</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\Observable\SetterOnlyObservableProperty.hpp">
+      <Filter>헤더 파일\Property\Observable</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\Lazy\LazyProperty.hpp">
+      <Filter>헤더 파일\Property\Lazy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Test.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

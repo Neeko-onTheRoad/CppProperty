@@ -17,11 +17,22 @@ namespace nk {
 		using GetterFunction = typename GetterOnlyProperty<TValue>::GetterFunction;
 		using SetterFunction = typename SetterOnlyProperty<TValue>::SetterFunction;
 
-		Property(GetterFunction getter, SetterFunction setter = nullptr)
+		Property(GetterFunction getter, SetterFunction setter = set(TValue) {})
 			: GetterOnlyProperty<TValue>(getter),
-			  SetterOnlyProperty<TValue>(setter ? setter : [&](const TValue&) {}) {}
+			  SetterOnlyProperty<TValue>(setter) {}
 
-		using SetterOnlyProperty<TValue>::operator=;
+		virtual ~Property() {}
+
+		Property& operator=(const TValue& newValue) {
+			this->_setter(newValue);
+			return *this;
+		}
+
+		Property& operator=(TValue&& other) {
+			this->_setter(std::move(other));
+			return *this;
+		}
+
 
 	};
 

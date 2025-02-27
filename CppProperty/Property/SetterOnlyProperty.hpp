@@ -3,6 +3,8 @@
 
 #include <functional>
 
+#define set(type) [&](const type& value)
+
 namespace nk {
 
 	template<typename TValue>
@@ -12,14 +14,10 @@ namespace nk {
 		
 		using SetterFunction = typename std::function<void(const TValue&)>;
 
-	public:
-
-		SetterFunction _setter;
-
 		SetterOnlyProperty(SetterFunction setter)
 			: _setter(setter) {}
 
-	public:
+		virtual ~SetterOnlyProperty() {}
 
 		SetterOnlyProperty& operator=(const TValue& newValue) {
 			_setter(newValue);
@@ -30,6 +28,10 @@ namespace nk {
 			_setter(std::move(other));
 			return *this;
 		}
+
+	protected:
+
+		SetterFunction _setter;
 
 	};
 
