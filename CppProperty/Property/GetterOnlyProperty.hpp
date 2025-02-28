@@ -19,7 +19,7 @@ namespace nk {
 
 		virtual ~GetterOnlyProperty() {}
 
-		operator const TValue&() {
+		operator TValue() const {
 			return _getter();
 		}
 

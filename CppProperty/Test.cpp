@@ -10,8 +10,7 @@ int main(void) {
 	GetterOnlyProperty<int> getterOnlyProperty1 {
 		get(int) {
 			cout << "GetterOnlyProperty1's getter method called.\n";
-			static const int value = 10;
-			return value;
+			return 10;
 		}
 	};
 
@@ -59,8 +58,7 @@ int main(void) {
 	cout << "Property Default Setter Test\n";
 	Property<bool> property2 {
 		get(bool) {
-			const static bool value = true;
-			return value;
+			return true;
 		}
 	};
 
