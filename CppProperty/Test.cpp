@@ -11,6 +11,7 @@ int main(void) {
 		get(int) {
 			cout << "GetterOnlyProperty1's getter method called.\n";
 			return 10;
+
 		}
 	};
 

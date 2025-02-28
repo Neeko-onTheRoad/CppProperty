@@ -1,8 +1,14 @@
 # C\# style C++ properties
 
-This is a simple library that makes you easy to write get/set function.
+This is a simple library that makes you easy to write get/set function.  
+You can use Properties by include `"CppProperty.hpp"`.  
+That header file include all properties.  
 
-## In C\#
+Or you can use specific property by include `"Property/<PropertyName>"`.
+
+## Property
+
+### In C\#
 
 ```cs
 using System;
@@ -27,11 +33,11 @@ public class TestClass {
 }
 ```
 
-## In C++ with this library
+### In C++ with this library
 
 ```cpp
 #include <iostream>
-#include "Property.hpp"
+#include "CppProperty.hpp"
 
 class TestClass {
 
@@ -62,5 +68,71 @@ public:
 ```
 
 Getter and Setter is macro.  
-You can replace `get(type)` to `[&]() -> type&`  
-And `set(type)` to `[&](const type&)`
+You can replace `get(type)` to `[&]() -> const type&`  
+And `set(type)` to `[&](const type&)`  
+
+### Caution
+
+Avoid retruning literal or temporary, local variable in getter.  
+It can cause invalid reference.
+
+## Special properties
+
+Some properties for special purposes.  
+
+### Lazy Property
+
+This property only run setter when getter called and the value changes.  
+It can be useful when setter need large operation.
+
+```cpp
+#include <iostream>
+#include "CppProperty"
+
+class TestClass {
+
+private:
+    int _fiboField;
+
+public:
+    nk::LazyProperty<int> Property {
+        get(int) {
+            std::cout << "Getter Called.\n";
+            return _fiboField;
+        },
+        set(int) {
+            std::cout << "Setter Called.\n";
+            _fiboField = Fibo(value);
+        }
+    };
+}
+
+int main(void) {
+
+    TestClass tc;
+
+    tc.Property = 5;
+    tc.Property = 10;
+    std::cout << tc.Property << std::endl;
+
+    tc.Property = 10;
+    std::cout << tc.Property << std::endl;
+
+    tc.Property = 5;
+    tc.Property = 10;
+    std::cout << tc.Property << std::endl;
+
+}
+```  
+
+This code will print:
+
+```text
+Setter Called.
+Getter Called.
+55
+Getter Called.
+55
+Getter Called.
+55
+```
