@@ -10,7 +10,8 @@ int main(void) {
 	GetterOnlyProperty<int> getterOnlyProperty1 {
 		get(int) {
 			cout << "GetterOnlyProperty1's getter method called.\n";
-			return 10;
+			static const int value = 10;
+			return value;
 		}
 	};
 
@@ -58,23 +59,71 @@ int main(void) {
 	cout << "Property Default Setter Test\n";
 	Property<bool> property2 {
 		get(bool) {
-			return true;
+			const static bool value = true;
+			return value;
 		}
 	};
 
 	property2 = false;
 	cout << property2 << "\n\n";
 
-	cout << "LazyProperty Test\n";
-	int field2;
-	LazyProperty<int> lazyProperty1 {
+	cout << "RValue Property Test\n";
+	int field2 = 0;
+	Property<int> property3 {
 		get(int) {
 			return field2;
 		},
 		set(int) {
-			cout << "Lazy Setter Called\n";
 			field2 = value;
 		}
 	};
+
+	field2 = std::move(69);
+	cout << field2 << "\n\n";
+
+	cout << "LazyProperty Test\n";
+	int field3 = 0;
+	LazyProperty<int> lazyProperty1 {
+		get(int) {
+			cout << "Lazy Getter Called\n";
+			return field2;
+		},
+		set(int) {
+			cout << "Lazy Setter Called: " << value << "\n";
+			field2 = value;
+		}
+	};
+
+	cout << "Lazy Property Set\n";
+	lazyProperty1 = 10;
+
+	cout << "Lazy Property Set\n";
+	lazyProperty1 = 20;
+
+	cout << lazyProperty1 << "\n";
+
+	cout << "Lazy Property Set Same Value\n";
+	lazyProperty1 = 20;
+
+	cout << lazyProperty1 << "\n\n";
+
+	cout << "Lazy Property Set Same Value With RValue\n";
+	lazyProperty1 = std::move(20);
+	
+	cout << lazyProperty1 << "\n\n";
+
+	cout << "Lazy Property Set Same Value\n";
+	lazyProperty1 = 20;
+
+	cout << lazyProperty1 << "\n\n";
+
+	cout << "Lazy Property Set RValue\n";
+	lazyProperty1 = std::move(30);
+	cout << lazyProperty1 << "\n\n";
+
+	cout << "Lazy Property Set A -> B -> A (Not Changed)\n";
+	lazyProperty1 = 20;
+	lazyProperty1 = 30;
+	cout << lazyProperty1 << "\n\n";
 
 }
