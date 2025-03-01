@@ -22,6 +22,9 @@
     <Filter Include="헤더 파일\Property\Lazy">
       <UniqueIdentifier>{d9f1246c-d041-4663-8755-46d27e60a4ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\General">
+      <UniqueIdentifier>{1290b238-6877-4348-af87-07bc027f98c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Property\GetterOnlyProperty.hpp">
@@ -44,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="Property\Lazy\LazyProperty.hpp">
       <Filter>헤더 파일\Property\Lazy</Filter>
+    </ClInclude>
+    <ClInclude Include="General\Event.hpp">
+      <Filter>헤더 파일\General</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

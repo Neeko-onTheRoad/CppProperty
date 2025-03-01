@@ -1,8 +1,14 @@
 #include <iostream>
+#include "./General/Event.hpp"
 #include "CppProperty.hpp"
 
 using namespace nk;
 using namespace std;
+
+static void TestFunction(int i, bool b, string s) {
+	std::cout << "This Is Test Method\n";
+	std::cout << s << "\n";
+}
 
 int main(void) {
 
@@ -10,7 +16,8 @@ int main(void) {
 	GetterOnlyProperty<int> getterOnlyProperty1 {
 		get(int) {
 			cout << "GetterOnlyProperty1's getter method called.\n";
-			return 10;
+			static const int value = 10;
+			return value;
 
 		}
 	};
@@ -59,7 +66,8 @@ int main(void) {
 	cout << "Property Default Setter Test\n";
 	Property<bool> property2 {
 		get(bool) {
-			return true;
+			static const bool value = true;
+			return value;
 		}
 	};
 
@@ -124,5 +132,21 @@ int main(void) {
 	lazyProperty1 = 20;
 	lazyProperty1 = 30;
 	cout << lazyProperty1 << "\n\n";
+
+	cout << "Event Test\n";
+	Event<int, bool, string> event1;
+	int lambda1Id = event1.Subscribe([&](int i, bool b, string s) {
+		cout << "Event Lambda1 Called\n";
+		cout << i << " " << b << " " << s << "\n";
+	});
+
+	int method1Id = event1.Subscribe(TestFunction);
+	int method2Id = event1.Subscribe(TestFunction);
+	cout << "\nCall1\n";
+	event1.Invoke(10, false, "Test");
+
+	event1.Unsubscribe(method2Id);
+	cout << "\nCall2\n";
+	event1.Invoke(1, true, "Test2");
 
 }

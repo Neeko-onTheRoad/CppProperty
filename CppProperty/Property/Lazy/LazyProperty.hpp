@@ -20,10 +20,11 @@ namespace nk {
 		using GetterFunction = typename Property<TValue>::GetterFunction;
 		using SetterFunction = typename Property<TValue>::SetterFunction;
 
-		using ReferenceBuffer = typename std::reference_wrapper<const TValue>;
-		using BufferContainer = typename std::variant<std::monostate, TValue, ReferenceBuffer>;
 
 	protected:
+
+		using ReferenceBuffer = typename std::reference_wrapper<const TValue>;
+		using BufferContainer = typename std::variant<std::monostate, TValue, ReferenceBuffer>;
 
 		bool _needUpdate = false;
 		BufferContainer _buffer;

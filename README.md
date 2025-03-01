@@ -2,9 +2,9 @@
 
 This is a simple library that makes you easy to write get/set function.  
 You can use Properties by include `"CppProperty.hpp"`.  
-That header file include all properties.  
+It includes all properties.  
 
-Or you can use specific property by include `"Property/<PropertyName>"`.
+Or you can use specific property by include `"Property/<PropertyName>.hpp"`.
 
 ## Property
 
@@ -76,6 +76,21 @@ And `set(type)` to `[&](const type&)`
 Avoid retruning literal or temporary, local variable in getter.  
 It can cause invalid reference.
 
+```cpp
+nk::GetterOnlyProperty<int> property1 {
+    get(int) {
+        return 10; // Not prefered
+    }
+}
+
+nk::GetterOnlyProperty<int> property2 {
+    get(int) {
+        static const int value = 10;
+        return value; // Prefered
+    }
+}
+```
+
 ## Special properties
 
 Some properties for special purposes.  
@@ -111,16 +126,16 @@ int main(void) {
 
     TestClass tc;
 
-    tc.Property = 5;
-    tc.Property = 10;
-    std::cout << tc.Property << std::endl;
+    tc.Property = 5; // Setter was not called
+    tc.Property = 10; // Setter was not called too
+    std::cout << tc.Property << std::endl; // Setter will called autometically befoure getter
 
     tc.Property = 10;
-    std::cout << tc.Property << std::endl;
+    std::cout << tc.Property << std::endl; // Setter will not called because value was not changed
 
     tc.Property = 5;
     tc.Property = 10;
-    std::cout << tc.Property << std::endl;
+    std::cout << tc.Property << std::endl; // Setter will also not called 
 
 }
 ```  

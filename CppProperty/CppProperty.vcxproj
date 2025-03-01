@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CppProperty.hpp" />
+    <ClInclude Include="General\Event.hpp" />
     <ClInclude Include="Property\GetterOnlyProperty.hpp" />
     <ClInclude Include="Property\Lazy\LazyProperty.hpp" />
     <ClInclude Include="Property\Observable\ObservableProperty.hpp" />
