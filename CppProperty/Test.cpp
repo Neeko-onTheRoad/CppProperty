@@ -7,7 +7,7 @@ using namespace std;
 
 static void TestFunction(int i, bool b, string s) {
 	std::cout << "This Is Test Method\n";
-	std::cout << s << "\n";
+	std::cout << s << " " << b << "\n";
 }
 
 int main(void) {
@@ -148,5 +148,23 @@ int main(void) {
 	event1.Unsubscribe(method2Id);
 	cout << "\nCall2\n";
 	event1.Invoke(1, true, "Test2");
+
+	function<void(int, bool, string)> func1 = event1;
+	cout << "\nFunc Call1\n";
+	func1(10, false, "Test3");
+
+	event1 = [](int, bool, string) {
+		cout << "Replaced\n";
+	};
+
+	cout << "\nEvent Replaced\n";
+	event1(0, false, "");
+
+	event1.SubscribeOnce([&](int, bool, string) {
+		cout << "Only One\n";
+	});
+
+	event1(0, false, "");
+	event1(0, false, "");
 
 }
