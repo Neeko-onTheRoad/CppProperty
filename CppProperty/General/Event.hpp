@@ -15,10 +15,14 @@ namespace nk {
 
 		using Handler = std::function<void(TArgs...)>;
 
-	private:
+	protected:
 
-		std::unordered_map<int, Handler> _handlers;
+		using HandlerTable = std::unordered_map<int, Handler>;
+
+	protected:
+
 		int _nextId = 0;
+		HandlerTable _handlers;
 
 	public:
 
@@ -34,12 +38,22 @@ namespace nk {
 			return id;
 		}
 
+		int SubscribeOnce(const Handler& handler) {
+			int id = _nextId++;
+			_handlers[id] = [this, handler, id](TArgs... args) {
+				handler(args...);
+				Unsubscribe(id);
+			};
+			return id;
+		}
+
 		void Unsubscribe(int id) {
 			_handlers.erase(id);
 		}
 
 		void Invoke(TArgs... args) {
-			for (auto& [id, handler] : _handlers) {
+			auto handlersCopy = _handlers;
+			for (auto& [id, handler] : handlersCopy) {
 				handler(args...);
 			}
 		}
@@ -53,19 +67,21 @@ namespace nk {
 			return Subscribe(handler);
 		}
 
+	public:
+
 		int operator=(Handler&& handler) {
 			Clear();
 			return Subscribe(std::move(handler));
+		}
+
+		void operator()(TArgs... args) {
+			Invoke(args...);
 		}
 
 		operator Handler() {
 			return [&](TArgs... args) {
 				Invoke(args...);
 			};
-		}
-
-		void operator()(TArgs... args) {
-			Invoke(args...);
 		}
 
 	};
