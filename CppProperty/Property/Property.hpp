@@ -9,7 +9,7 @@ namespace nk {
 	template<typename TValue>
 	class Property
 		: public GetterOnlyProperty<TValue>,
-		  public SetterOnlyProperty<TValue>
+		  virtual public SetterOnlyProperty<TValue>
 	{
 
 	public:
@@ -26,15 +26,14 @@ namespace nk {
 		virtual ~Property() {}
 
 		Property& operator=(const TValue& newValue) {
-			this->_setter(newValue);
+			static_cast<SetterOnlyProperty<TValue>&>(*this) = newValue;
 			return *this;
 		}
 
-		Property& operator=(TValue&& other) {
-			this->_setter(std::move(other));
+		Property& operator=(TValue&& newValue) {
+			static_cast<SetterOnlyProperty<TValue>&>(*this) = std::move(newValue);
 			return *this;
 		}
-
 
 	};
 

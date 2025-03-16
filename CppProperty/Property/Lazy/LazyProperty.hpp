@@ -27,9 +27,9 @@ namespace nk {
 
 	protected:
 
-		bool _needUpdate = false;
-		BufferContainer _buffer;
-		BufferContainer _lastValue;
+		mutable bool _needUpdate = false;
+		mutable BufferContainer _buffer;
+		mutable BufferContainer _lastValue;
 
 	public:
 
@@ -65,11 +65,11 @@ namespace nk {
 
 			if (auto* ptr = std::get_if<TValue>(&_buffer)) {
 				_lastValue = *ptr;
-				this->_setter(*ptr);
+				static_cast<Property<TValue>&>(*this) = *ptr;
 			}
 			else if (auto* ref = std::get_if<ReferenceBuffer>(&_buffer)) {
 				_lastValue = ref->get();
-				this->_setter(ref->get());
+				static_cast<Property<TValue>&>(*this) = ref->get();
 			}
 
 			_needUpdate = false;
@@ -82,11 +82,11 @@ namespace nk {
 			return AssignValue(newValue);
 		}
 
-		LazyProperty& operator=(TValue&& other) {
-			return AssignValue(std::move(other));
+		LazyProperty& operator=(TValue&& newValue) {
+			return AssignValue(std::move(newValue));
 		}
 
-		operator const TValue& () {
+		operator const TValue&() {
 			if (_needUpdate) CommitBuffer();
 			return this->_getter();
 		}

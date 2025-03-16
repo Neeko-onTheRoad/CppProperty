@@ -16,7 +16,7 @@ namespace nk {
 
 	protected:
 
-		SetterFunction _setter;
+		const SetterFunction _setter;
 
 	public:
 
@@ -32,8 +32,8 @@ namespace nk {
 			return *this;
 		}
 
-		SetterOnlyProperty& operator=(TValue&& other) {
-			_setter(std::move(other));
+		SetterOnlyProperty& operator=(TValue&& newValue) {
+			_setter(std::move(newValue));
 			return *this;
 		}
 

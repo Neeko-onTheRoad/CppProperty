@@ -16,7 +16,7 @@ namespace nk {
 
 	protected:
 
-		GetterFunction _getter;
+		const GetterFunction _getter;
 
 	public:
 
@@ -28,7 +28,7 @@ namespace nk {
 
 	public:
 
-		operator TValue() const {
+		operator const TValue&() {
 			return _getter();
 		}
 

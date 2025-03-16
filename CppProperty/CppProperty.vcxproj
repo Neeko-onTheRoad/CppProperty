@@ -24,7 +24,7 @@
     <ClInclude Include="Property\GetterOnlyProperty.hpp" />
     <ClInclude Include="Property\Lazy\LazyProperty.hpp" />
     <ClInclude Include="Property\Observable\ObservableProperty.hpp" />
-    <ClInclude Include="Property\Observable\SetterOnlyObservableProperty.hpp" />
+    <ClInclude Include="Property\Observable\ObservableSetterOnlyProperty.hpp" />
     <ClInclude Include="Property\Property.hpp" />
     <ClInclude Include="Property\SetterOnlyProperty.hpp" />
   </ItemGroup>

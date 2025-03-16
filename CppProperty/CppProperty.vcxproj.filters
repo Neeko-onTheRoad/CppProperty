@@ -42,7 +42,7 @@
     <ClInclude Include="Property\Observable\ObservableProperty.hpp">
       <Filter>헤더 파일\Property\Observable</Filter>
     </ClInclude>
-    <ClInclude Include="Property\Observable\SetterOnlyObservableProperty.hpp">
+    <ClInclude Include="Property\Observable\ObservableSetterOnlyProperty.hpp">
       <Filter>헤더 파일\Property\Observable</Filter>
     </ClInclude>
     <ClInclude Include="Property\Lazy\LazyProperty.hpp">
