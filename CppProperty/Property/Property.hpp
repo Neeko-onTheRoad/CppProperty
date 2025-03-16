@@ -8,7 +8,7 @@ namespace nk {
 
 	template<typename TValue>
 	class Property
-		: public GetterOnlyProperty<TValue>,
+		: virtual public GetterOnlyProperty<TValue>,
 		  virtual public SetterOnlyProperty<TValue>
 	{
 

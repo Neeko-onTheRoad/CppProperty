@@ -5,7 +5,7 @@
 #include "Property/Lazy/LazyProperty.hpp"
 
 #include "Property/Observable/ObservableProperty.hpp"
-#include "Property/Observable/SetterOnlyObservableProperty.hpp"
+#include "Property/Observable/ObservableSetterOnlyProperty.hpp"
 
 #ifndef get
 	#define get(type) [&]() -> const type&
