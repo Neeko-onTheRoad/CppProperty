@@ -14,18 +14,23 @@ namespace nk {
 		
 		using GetterFunction = typename std::function<const TValue&()>;
 
+	protected:
+
+		GetterFunction _getter;
+
+	public:
+
 		GetterOnlyProperty(GetterFunction getter)
 			: _getter(getter) {}
 
+
 		virtual ~GetterOnlyProperty() {}
+
+	public:
 
 		operator TValue() const {
 			return _getter();
 		}
-
-	protected:
-
-		GetterFunction _getter;
 
 	};
 

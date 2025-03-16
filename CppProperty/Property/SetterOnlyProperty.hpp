@@ -14,10 +14,18 @@ namespace nk {
 		
 		using SetterFunction = typename std::function<void(const TValue&)>;
 
+	protected:
+
+		SetterFunction _setter;
+
+	public:
+
 		SetterOnlyProperty(SetterFunction setter)
 			: _setter(setter) {}
 
 		virtual ~SetterOnlyProperty() {}
+
+	public:
 
 		SetterOnlyProperty& operator=(const TValue& newValue) {
 			_setter(newValue);
@@ -28,10 +36,6 @@ namespace nk {
 			_setter(std::move(other));
 			return *this;
 		}
-
-	protected:
-
-		SetterFunction _setter;
 
 	};
 

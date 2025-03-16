@@ -17,6 +17,8 @@ namespace nk {
 		using GetterFunction = typename GetterOnlyProperty<TValue>::GetterFunction;
 		using SetterFunction = typename SetterOnlyProperty<TValue>::SetterFunction;
 
+	public:
+
 		Property(GetterFunction getter, SetterFunction setter = set(TValue) {})
 			: GetterOnlyProperty<TValue>(getter),
 			  SetterOnlyProperty<TValue>(setter) {}

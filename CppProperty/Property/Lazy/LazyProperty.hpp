@@ -20,11 +20,12 @@ namespace nk {
 		using GetterFunction = typename Property<TValue>::GetterFunction;
 		using SetterFunction = typename Property<TValue>::SetterFunction;
 
-
 	protected:
 
 		using ReferenceBuffer = typename std::reference_wrapper<const TValue>;
 		using BufferContainer = typename std::variant<std::monostate, TValue, ReferenceBuffer>;
+
+	protected:
 
 		bool _needUpdate = false;
 		BufferContainer _buffer;
@@ -34,19 +35,6 @@ namespace nk {
 
 		LazyProperty(GetterFunction getter, SetterFunction setter = set(TValue) {})
 			: Property<TValue>(getter, setter) {}
-
-		LazyProperty& operator=(const TValue& newValue) {
-			return AssignValue(newValue);
-		}
-
-		LazyProperty& operator=(TValue&& other) {
-			return AssignValue(std::move(other));
-		}
-
-		operator const TValue&() {
-			if (_needUpdate) CommitBuffer();
-			return this->_getter();
-		}
 
 	private:
 		
@@ -86,6 +74,21 @@ namespace nk {
 
 			_needUpdate = false;
 
+		}
+
+	public:
+
+		LazyProperty& operator=(const TValue& newValue) {
+			return AssignValue(newValue);
+		}
+
+		LazyProperty& operator=(TValue&& other) {
+			return AssignValue(std::move(other));
+		}
+
+		operator const TValue& () {
+			if (_needUpdate) CommitBuffer();
+			return this->_getter();
 		}
 
 	};
