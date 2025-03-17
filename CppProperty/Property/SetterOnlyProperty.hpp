@@ -20,7 +20,7 @@ namespace nk {
 
 	public:
 
-		SetterOnlyProperty(SetterFunction setter)
+		SetterOnlyProperty(const SetterFunction& setter)
 			: _setter(setter) {}
 
 		virtual ~SetterOnlyProperty() {}

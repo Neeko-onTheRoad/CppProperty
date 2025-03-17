@@ -16,14 +16,14 @@
     <Filter Include="헤더 파일\Property">
       <UniqueIdentifier>{fa05463b-6268-40ad-83d0-9a061c9addbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\Property\Observable">
-      <UniqueIdentifier>{c6b0d6f6-e8e2-4b36-8107-886ff6742edc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Property\Lazy">
       <UniqueIdentifier>{d9f1246c-d041-4663-8755-46d27e60a4ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\General">
       <UniqueIdentifier>{1290b238-6877-4348-af87-07bc027f98c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Property\Observable">
+      <UniqueIdentifier>{c6b0d6f6-e8e2-4b36-8107-886ff6742edc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

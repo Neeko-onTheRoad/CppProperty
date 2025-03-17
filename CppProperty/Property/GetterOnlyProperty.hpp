@@ -20,7 +20,7 @@ namespace nk {
 
 	public:
 
-		GetterOnlyProperty(GetterFunction getter)
+		GetterOnlyProperty(const GetterFunction& getter)
 			: _getter(getter) {}
 
 

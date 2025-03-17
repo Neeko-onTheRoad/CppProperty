@@ -13,7 +13,8 @@
 namespace nk {
 
 	template<typename TValue>
-	class LazyProperty : protected Property<TValue> {
+	class LazyProperty
+		: protected Property<TValue> {
 
 	public:
 
@@ -33,13 +34,19 @@ namespace nk {
 
 	public:
 
-		LazyProperty(GetterFunction getter, SetterFunction setter = set(TValue) {})
-			: Property<TValue>(getter, setter) {}
+		LazyProperty(const GetterFunction& getter, const SetterFunction& setter = set(TValue) {})
+			: GetterOnlyProperty<TValue>(getter),
+			  SetterOnlyProperty<TValue>(setter),
+			  Property<TValue>(getter, setter) {}
 
 	private:
+
+		inline Property<TValue>& AsProperty() const noexcept {
+			return static_cast<Property<TValue>&>(*this);
+		}
 		
 		template<typename T>
-		LazyProperty& AssignValue(T&& value) {
+		inline LazyProperty& AssignValue(T&& value) {
 
 			if (auto* ptr = std::get_if<TValue>(&_lastValue)) {
 				if (*ptr == value) {
@@ -61,15 +68,15 @@ namespace nk {
 
 		}
 
-		void CommitBuffer() {
+		inline void CommitBuffer() {
 
 			if (auto* ptr = std::get_if<TValue>(&_buffer)) {
 				_lastValue = *ptr;
-				static_cast<Property<TValue>&>(*this) = *ptr;
+				AsProperty() = *ptr;
 			}
 			else if (auto* ref = std::get_if<ReferenceBuffer>(&_buffer)) {
 				_lastValue = ref->get();
-				static_cast<Property<TValue>&>(*this) = ref->get();
+				AsProperty() = ref->get();
 			}
 
 			_needUpdate = false;
@@ -91,7 +98,7 @@ namespace nk {
 			return this->_getter();
 		}
 
-	};
+	};	
 
 }
 

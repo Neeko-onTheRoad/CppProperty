@@ -9,8 +9,7 @@ namespace nk {
 	template<typename TValue>
 	class Property
 		: virtual public GetterOnlyProperty<TValue>,
-		  virtual public SetterOnlyProperty<TValue>
-	{
+		  virtual public SetterOnlyProperty<TValue> {
 
 	public:
 
@@ -19,22 +18,30 @@ namespace nk {
 
 	public:
 
-		Property(GetterFunction getter, SetterFunction setter = set(TValue) {})
+		Property(const GetterFunction& getter, const SetterFunction& setter = set(TValue) {})
 			: GetterOnlyProperty<TValue>(getter),
 			  SetterOnlyProperty<TValue>(setter) {}
 
 		virtual ~Property() {}
 
+	private:
+
+		inline SetterOnlyProperty<TValue>& AsSetterOnlyProperty() noexcept {
+			return static_cast<SetterOnlyProperty<TValue>&>(*this);
+		}
+
+	public:
+
 		Property& operator=(const TValue& newValue) {
-			static_cast<SetterOnlyProperty<TValue>&>(*this) = newValue;
+			AsSetterOnlyProperty() = newValue;
 			return *this;
 		}
 
 		Property& operator=(TValue&& newValue) {
-			static_cast<SetterOnlyProperty<TValue>&>(*this) = std::move(newValue);
+			AsSetterOnlyProperty() = std::move(newValue);
 			return *this;
 		}
-
+		
 	};
 
 }
